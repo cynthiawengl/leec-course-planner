@@ -40,7 +40,7 @@ The parsed result is stored in [`planner/courses.json`](planner/courses.json) an
 │   ├── index.html      # single-page app (credit planner + weekly schedule)
 │   └── courses.json    # parsed course data
 ├── A3ES MEIC2026 Plano curricular.xlsx
-├── Currículo · Mestrado Bolonha em Engenharia Eletrotécnica e de Computadores.pdf
+└── Currículo · Mestrado Bolonha em Engenharia Eletrotécnica e de Computadores.pdf
 ```
 
 ## Running locally
