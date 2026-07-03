@@ -1,4 +1,4 @@
-# LEEC Course Planner
+# MEIC/MEEC Course Planner
 
 A pure front-end single-page app that helps you pick courses and plan credits across two Técnico Lisboa master's programs — **MEEC** (Master in Electrical and Computer Engineering) and **MEIC-A** (Master in Computer Science and Computer Engineering) — and arrange a weekly class timetable.
 
