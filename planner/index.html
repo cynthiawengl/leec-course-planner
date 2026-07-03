@@ -109,6 +109,24 @@
     font-size: 13px;
   }
   .course-chip.locked { border-style: dashed; color: var(--muted); }
+  .course-chip.span-chip { background: var(--accent-bg); border-color: rgba(59,111,224,.3); }
+  .period-block { margin-bottom: 10px; }
+  .period-block-label {
+    font-size: 10.5px; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .04em; margin-bottom: 5px;
+  }
+  .period-columns {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  }
+  .period-col {
+    background: var(--panel2);
+    border: 1px dashed var(--border);
+    border-radius: 9px;
+    padding: 6px;
+    min-height: 34px;
+  }
+  .period-col .period-block-label { padding-left: 2px; }
+  .period-col-empty { color: var(--muted); font-size: 11px; padding: 4px 2px; }
   .course-chip .tag {
     font-size: 10px;
     padding: 1px 6px;
@@ -359,9 +377,13 @@ const SLOTS = [
 ];
 
 const FIXED = {
-  y2s1: [{id: 'fixed-pic', name: 'PIC · 二级项目 (Projeto Integrador)', credits: 12}],
-  y2s2: [{id: 'fixed-tese', name: 'Tese · 硕士论文 (Dissertação)', credits: 30}],
+  y2s1: [{id: 'fixed-pic', name: 'PIC · 二级项目 (Projeto Integrador)', credits: 12, periods: [1, 2]}],
+  y2s2: [{id: 'fixed-tese', name: 'Tese · 硕士论文 (Dissertação)', credits: 30, periods: [3, 4]}],
 };
+
+function periodsForSlot(slot) {
+  return slot.sem === 1 ? [1, 2] : [3, 4];
+}
 
 const MAX_CREDITS = 36;
 const STORAGE_KEY = 'course-plan-v1';
@@ -439,12 +461,32 @@ function barColor(used) {
   return 'var(--ok)';
 }
 
+function makeChip(item, opts) {
+  opts = opts || {};
+  const chip = document.createElement('div');
+  chip.className = 'course-chip' + (opts.locked ? ' locked' : '') + (opts.span ? ' span-chip' : '');
+  const tag = opts.locked
+    ? '<span class="tag fixed">锁定</span>'
+    : `<span class="tag ${item.program === 'MEEC' ? 'meec' : 'meic'}">${item.program}</span>`;
+  chip.innerHTML = `
+    ${tag}
+    <span class="name">${item.name}</span>
+    <span class="cred">${item.credits} ECTS</span>
+    ${opts.locked ? '' : '<button class="remove" title="移除">×</button>'}
+  `;
+  if (!opts.locked) {
+    chip.querySelector('.remove').onclick = () => removeCourse(opts.slotKey, item.id);
+  }
+  return chip;
+}
+
 function renderSemesters() {
   const root = document.getElementById('semesters');
   root.innerHTML = '';
   SLOTS.forEach(slot => {
     const used = slotCredits(slot.key);
     const pct = Math.min(100, (used / MAX_CREDITS) * 100);
+    const [pA, pB] = periodsForSlot(slot);
     const card = document.createElement('div');
     card.className = 'sem-card';
     const over = used > MAX_CREDITS ? ' ⚠ 超出上限' : '';
@@ -454,39 +496,57 @@ function renderSemesters() {
         <span class="sem-credit-label" style="color:${barColor(used)}">${used} / ${MAX_CREDITS} ECTS${over}</span>
       </div>
       <div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:${barColor(used)}"></div></div>
-      <div class="chip-list"></div>
+      <div class="period-block span-block">
+        <div class="period-block-label">贯穿整学期 (P${pA}+P${pB})</div>
+        <div class="chip-list span-list"></div>
+      </div>
+      <div class="period-columns">
+        <div class="period-col">
+          <div class="period-block-label">P${pA}</div>
+          <div class="chip-list pa-list"></div>
+        </div>
+        <div class="period-col">
+          <div class="period-block-label">P${pB}</div>
+          <div class="chip-list pb-list"></div>
+        </div>
+      </div>
     `;
-    const list = card.querySelector('.chip-list');
+    const spanList = card.querySelector('.span-list');
+    const paList = card.querySelector('.pa-list');
+    const pbList = card.querySelector('.pb-list');
 
     (FIXED[slot.key] || []).forEach(fc => {
-      const chip = document.createElement('div');
-      chip.className = 'course-chip locked';
-      chip.innerHTML = `<span class="tag fixed">锁定</span><span class="name">${fc.name}</span><span class="cred">${fc.credits} ECTS</span>`;
-      list.appendChild(chip);
+      spanList.appendChild(makeChip(fc, {locked: true, span: true}));
     });
 
-    if (selections[slot.key].length === 0 && !(FIXED[slot.key] && FIXED[slot.key].length)) {
+    const chosen = selections[slot.key].map(id => courseById(id)).filter(Boolean);
+    const spanCourses = chosen.filter(c => c.periods.length === 2);
+    const paCourses = chosen.filter(c => c.periods.length === 1 && c.periods[0] === pA);
+    const pbCourses = chosen.filter(c => c.periods.length === 1 && c.periods[0] === pB);
+
+    if (spanCourses.length === 0 && !(FIXED[slot.key] && FIXED[slot.key].length)) {
       const hint = document.createElement('div');
       hint.className = 'empty-hint';
-      hint.textContent = '尚未添加课程，请从右侧目录选择';
-      list.appendChild(hint);
+      hint.textContent = '暂无贯穿整学期的课程';
+      spanList.appendChild(hint);
     }
+    spanCourses.forEach(c => spanList.appendChild(makeChip(c, {slotKey: slot.key, span: true})));
 
-    selections[slot.key].forEach(id => {
-      const c = courseById(id);
-      if (!c) return;
-      const chip = document.createElement('div');
-      chip.className = 'course-chip';
-      const tagClass = c.program === 'MEEC' ? 'meec' : 'meic';
-      chip.innerHTML = `
-        <span class="tag ${tagClass}">${c.program}</span>
-        <span class="name">${c.name}</span>
-        <span class="cred">${c.credits} ECTS</span>
-        <button class="remove" title="移除">×</button>
-      `;
-      chip.querySelector('.remove').onclick = () => removeCourse(slot.key, id);
-      list.appendChild(chip);
-    });
+    if (paCourses.length === 0) {
+      const hint = document.createElement('div');
+      hint.className = 'period-col-empty';
+      hint.textContent = '暂无课程';
+      paList.appendChild(hint);
+    }
+    paCourses.forEach(c => paList.appendChild(makeChip(c, {slotKey: slot.key})));
+
+    if (pbCourses.length === 0) {
+      const hint = document.createElement('div');
+      hint.className = 'period-col-empty';
+      hint.textContent = '暂无课程';
+      pbList.appendChild(hint);
+    }
+    pbCourses.forEach(c => pbList.appendChild(makeChip(c, {slotKey: slot.key})));
 
     root.appendChild(card);
   });
@@ -538,7 +598,7 @@ function renderCatalog() {
     el.className = 'cat-item';
     const taken = isSelectedAnywhere(c.id);
     const tagClass = c.program === 'MEEC' ? 'meec' : 'meic';
-    const periodStr = c.period ? ` · P${c.period}` : '';
+    const periodStr = c.periods.length === 2 ? ' · 贯穿整学期' : ` · P${c.periods[0]}`;
     el.innerHTML = `
       <div class="top">
         <span class="tag ${tagClass}">${c.program}</span>
