@@ -25,22 +25,20 @@ Just open [`planner/index.html`](planner/index.html) in a browser — no install
 
 ## Data sources
 
-Course data was parsed from two official curriculum documents (both kept at the repo root):
+Course data was parsed from two official curriculum documents (not included in this repo — they're institutional PDFs/spreadsheets, kept locally only):
 
-- `Currículo · Mestrado Bolonha em Engenharia Eletrotécnica e de Computadores.pdf` — official MEEC curriculum (86 courses)
-- `A3ES MEIC2026 Plano curricular.xlsx` — MEIC-A credit structure sheet (56 courses)
+- MEEC official curriculum PDF (86 courses)
+- MEIC-A credit structure spreadsheet (56 courses)
 
-The parsed result is stored in [`planner/courses.json`](planner/courses.json) and embedded directly into `index.html`, so the page needs no extra network requests.
+The parsed result is stored in [`planner/courses.json`](planner/courses.json) and embedded directly into `index.html`, so the page needs no extra network requests and no source documents to run.
 
 ## Project structure
 
 ```
 .
-├── planner/
-│   ├── index.html      # single-page app (credit planner + weekly schedule)
-│   └── courses.json    # parsed course data
-├── A3ES MEIC2026 Plano curricular.xlsx
-└── Currículo · Mestrado Bolonha em Engenharia Eletrotécnica e de Computadores.pdf
+└── planner/
+    ├── index.html      # single-page app (credit planner + weekly schedule)
+    └── courses.json    # parsed course data
 ```
 
 ## Running locally
