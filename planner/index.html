@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>课程学分规划</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel2: #1e222b;
+    --border: #2a2f3a;
+    --text: #e8eaed;
+    --muted: #8b93a3;
+    --accent: #5b8def;
+    --accent2: #7c5bef;
+    --meec: #4fb0ff;
+    --meic: #ff9f5b;
+    --ok: #3ecf8e;
+    --warn: #f5c451;
+    --danger: #f0576b;
+    --locked: #6b7280;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  header {
+    padding: 20px 28px 14px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 20;
+  }
+  header h1 { margin: 0 0 4px; font-size: 20px; }
+  header p { margin: 0; color: var(--muted); font-size: 13px; }
+  .rules {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .rules span {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 0;
+    align-items: start;
+  }
+  .semesters {
+    padding: 20px 16px 60px 28px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .semesters { grid-template-columns: 1fr; padding-right: 16px; }
+  }
+  .sem-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    min-height: 160px;
+  }
+  .sem-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .sem-head h2 { font-size: 15px; margin: 0; }
+  .sem-credit-label { font-size: 13px; font-weight: 600; }
+  .bar-track {
+    height: 7px;
+    border-radius: 5px;
+    background: #2a2f3a;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .bar-fill { height: 100%; border-radius: 5px; transition: width .25s ease, background .25s ease; }
+  .course-chip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 7px 10px;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+  .course-chip.locked { border-style: dashed; color: var(--muted); }
+  .course-chip .tag {
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 8px;
+    margin-right: 6px;
+    font-weight: 600;
+  }
+  .tag.meec { background: rgba(79,176,255,.18); color: var(--meec); }
+  .tag.meic { background: rgba(255,159,91,.18); color: var(--meic); }
+  .tag.fixed { background: rgba(107,114,128,.25); color: var(--locked); }
+  .course-chip .name { flex: 1; }
+  .course-chip .cred { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .course-chip button.remove {
+    background: none; border: none; color: var(--muted);
+    cursor: pointer; font-size: 15px; line-height: 1; padding: 2px 4px;
+  }
+  .course-chip button.remove:hover { color: var(--danger); }
+  .empty-hint { color: var(--muted); font-size: 12.5px; padding: 6px 2px; }
+
+  .sidebar {
+    position: sticky;
+    top: 96px;
+    height: calc(100vh - 96px);
+    border-left: 1px solid var(--border);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .sidebar h3 { margin: 0 0 4px; font-size: 14px; }
+  .search-box input[type=text] {
+    width: 100%;
+    padding: 9px 12px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background: var(--panel2);
+    color: var(--text);
+    font-size: 13px;
+  }
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px; }
+  .filters label {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--panel2); border: 1px solid var(--border);
+    padding: 4px 9px; border-radius: 20px; cursor: pointer; color: var(--muted);
+  }
+  .filters input { accent-color: var(--accent); }
+  select {
+    background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 8px; font-size: 12.5px; width: 100%;
+  }
+  .catalog {
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 4px;
+  }
+  .cat-item {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 9px 11px;
+  }
+  .cat-item .top { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .cat-item .top .name { font-size: 13px; font-weight: 500; flex: 1; }
+  .cat-item .meta { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .cat-item .actions { display: flex; gap: 6px; }
+  .cat-item .actions button {
+    flex: 1;
+    background: rgba(91,141,239,.12);
+    border: 1px solid rgba(91,141,239,.35);
+    color: var(--accent);
+    padding: 5px 8px;
+    border-radius: 7px;
+    font-size: 11.5px;
+    cursor: pointer;
+  }
+  .cat-item .actions button:hover { background: rgba(91,141,239,.25); }
+  .cat-item .actions button:disabled {
+    opacity: .35; cursor: not-allowed;
+  }
+  .count-pill { color: var(--muted); font-size: 11.5px; }
+  .totalbar {
+    padding: 10px 12px;
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 12.5px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+  }
+  .totalbar b { color: var(--text); }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .reset-btn {
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    border-radius: 8px; padding: 6px 10px; font-size: 12px; cursor: pointer;
+  }
+  .reset-btn:hover { color: var(--danger); border-color: var(--danger); }
+</style>
+</head>
+<body>
+
+<header>
+  <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+    <div>
+      <h1>课程学分规划表</h1>
+      <p>MEEC (电气与计算机工程) + MEIC-A (信息与计算机工程) · 两年四学期</p>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">清空所有已选课程</button>
+  </div>
+  <div class="rules">
+    <span>每学期上限 36 ECTS</span>
+    <span>第二年 第一学期：PIC 项目 12 ECTS（必修，已锁定）</span>
+    <span>第二年 第二学期：论文 Tese 30 ECTS（必修，已锁定）</span>
+    <span>一个学期包含两个 period（P1/P2 或 P3/P4）</span>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="semesters" id="semesters"></div>
+
+  <div class="sidebar">
+    <h3>课程目录（点击加入学期）</h3>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="搜索课程名称 / 缩写...">
+    </div>
+    <div class="filters" id="programFilters"></div>
+    <select id="trackFilter"></select>
+    <div class="totalbar">
+      <span>目录中课程数</span>
+      <span id="catalogCount">-</span>
+    </div>
+    <div class="catalog" id="catalog"></div>
+  </div>
+</div>
+
+<script>
+const COURSES = [{"id": "meec-845953938489772", "name": "Empreendedorismo, Inovação e Transferência de Tecnologia", "program": "MEEC", "dept": "DEEC", "track": "Tronco Comum", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489771", "name": "Gestão de Projectos de Engenharia", "program": "MEEC", "dept": "DEEC", "track": "Tronco Comum", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489776", "name": "Sistemas de Medida de Grande Escala", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-845953938489778", "name": "Sistemas de Tempo Real", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-845953938489773", "name": "Arquitecturas para Computação de Elevado Desempenho", "program": "MEEC", "dept": "DEEC", "track": "Dispositivos e Interface com o Meio Físico", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489774", "name": "Redes Móveis e Internet das Coisas", "program": "MEEC", "dept": "DEEC", "track": "Aplicações", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489775", "name": "Sensores e Actuadores", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200467", "name": "Sistemas de Processamento Digital de Sinal", "program": "MEEC", "dept": "DEEC", "track": "Energia", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489779", "name": "Tecnologias dos Sistemas de Computação", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489780", "name": "Circuitos de Ultra-Baixo Consumo", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-845953938489781", "name": "Electrónica de Potência", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-845953938489783", "name": "Nanotecnologias", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meec-845953938489785", "name": "Projecto de Sistemas Digitais", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-845953938489786", "name": "Sistemas em Circuito Integrado", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-845953938489787", "name": "Sistemas Integrados Analógicos e Mistos", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-845953938489782", "name": "Microeletrónica", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489784", "name": "Optoeletrónica", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1690378868621423", "name": "Sistemas Integrados de Radiofrequência", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489793", "name": "Controlo de Sistemas Ciberfísicos", "program": "MEEC", "dept": "DEEC", "track": "Aplicações", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-845953938489795", "name": "Robótica", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-845953938489794", "name": "Controlo Multivariável, Não-Linear e Ótimo", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489790", "name": "Estimação e Controlo Preditivo Distribuído", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489792", "name": "Modelação e Automação de Processos Industriais", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489788", "name": "Optimização e Algoritmos", "program": "MEEC", "dept": "DEEC", "track": "Aplicações e Serviços", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489789", "name": "Processamento Digital de Sinais", "program": "MEEC", "dept": "DEEC", "track": "Controlo", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489791", "name": "Sistemas de Controlo Distribuído em Tempo Real", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938489796", "name": "Inteligência Artificial e Sistemas de Decisão", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200263", "name": "Processamento de Imagem e Visão", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200262", "name": "Processamento da Fala", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200261", "name": "Programação de Sistemas", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200260", "name": "Sistemas Autónomos", "program": "MEEC", "dept": "DEEC", "track": "Aplicações", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200264", "name": "Aprendizagem Automática", "program": "MEEC", "dept": "DEEC", "track": "Aplicações e Serviços", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200265", "name": "Aprendizagem Profunda", "program": "MEEC", "dept": "DEEC", "track": "Arquiteturas e Computação", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meec-1127428915200266", "name": "Processamento de Big Data", "program": "MEEC", "dept": "DEEC", "track": "Controlo", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200271", "name": "Alta Tensão", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200269", "name": "Análise de Redes", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200272", "name": "Economia e Mercados de Energia", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200267", "name": "Produção e Consumo de Energia Eléctrica", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-845953938490163", "name": "Proteção de Sistemas de Energia", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200273", "name": "Analítica de Dados para Redes Inteligentes", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200270", "name": "Controlo e Optimização de Sistemas de Energia", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200268", "name": "Regimes Transitórios em Redes", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200275", "name": "Accionamentos e Veículos Eléctricos", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200274", "name": "Máquinas Eléctricas", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200276", "name": "Energias Renováveis e Produção Descentralizada", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200277", "name": "Sistemas Elétricos Integrados de Tecnologia Solar Fotovoltaica", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200279", "name": "Conversão Electrónica e Armazenamento de Energia", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-845953938490162", "name": "Eletrónica de Potência para Energia", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200278", "name": "Conversores Comutados para Energias Renováveis", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200280", "name": "Microredes Dc/Ac", "program": "MEEC", "dept": "DEEC", "track": "Circuitos e Sistemas Eletrónicos", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200283", "name": "Aplicações Distribuídas sobre a Internet", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200284", "name": "Aplicações e Tecnologias Móveis", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200281", "name": "Redes Elétricas Inteligentes", "program": "MEEC", "dept": "DEEC", "track": "Aplicações", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200285", "name": "Instalações e Edifícios Inteligentes", "program": "MEEC", "dept": "DEEC", "track": "Controlo, Robótica e Inteligência Artificial", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200282", "name": "Segurança das Comunicações", "program": "MEEC", "dept": "DEEC", "track": "Aplicações", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200286", "name": "Computação Inteligente", "program": "MEEC", "dept": "DEEC", "track": "Arquiteturas e Computação", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200287", "name": "Radiopropagação para Comunicações e Sensores", "program": "MEEC", "dept": "DEEC", "track": "Aplicações", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200289", "name": "Computação em Sistemas Paralelos e Heterogéneos", "program": "MEEC", "dept": "DEEC", "track": "Dispositivos e Interface com o Meio Físico", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200290", "name": "Computação Paralela e Distribuída", "program": "MEEC", "dept": "DEEC", "track": "Dispositivos e Interface com o Meio Físico", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meec-1127428915200288", "name": "Co-Projeto Hardware/Software", "program": "MEEC", "dept": "DEEC", "track": "Dispositivos e Interface com o Meio Físico", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200291", "name": "Programação Orientada por Objectos", "program": "MEEC", "dept": "DEEC", "track": "Energia", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200292", "name": "Automação do Projeto Eletrónico", "program": "MEEC", "dept": "DEEC", "track": "Arquiteturas e Computação", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200293", "name": "Algoritmia em Redes e Aplicações", "program": "MEEC", "dept": "DEEC", "track": "Telecomunicações", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200294", "name": "Desempenho e Dimensionamento de Redes e Sistemas", "program": "MEEC", "dept": "DEEC", "track": "Energia", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200295", "name": "Teoria da Informação e Comunicação", "program": "MEEC", "dept": "DEEC", "track": "Aplicações e Serviços", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200296", "name": "Transmissão Digital", "program": "MEEC", "dept": "DEEC", "track": "Aplicações e Serviços", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200297", "name": "Comunicação Multimédia", "program": "MEEC", "dept": "DEEC", "track": "Aplicações e Serviços", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938490257", "name": "Redes de Alto Débito", "program": "MEEC", "dept": "DEEC", "track": "Redes e Sistemas de Comunicação", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200300", "name": "Redes Veiculares", "program": "MEEC", "dept": "DEEC", "track": "Redes e Sistemas de Comunicação", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200298", "name": "Arquitectura e Gestão de Redes", "program": "MEEC", "dept": "DEEC", "track": "Redes e Sistemas de Comunicação", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200299", "name": "Sistemas de Navegação", "program": "MEEC", "dept": "DEEC", "track": "Redes e Sistemas de Comunicação", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200302", "name": "Redes Programáveis", "program": "MEEC", "dept": "DEEC", "track": "Redes e Sistemas de Comunicação", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200303", "name": "Sistemas de Informação e Bases de Dados", "program": "MEEC", "dept": "DEEC", "track": "Redes e Sistemas de Comunicação", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meec-1127428915200304", "name": "Processamento Multimédia Baseado em Aprendizagem", "program": "MEEC", "dept": "DEEC", "track": "Aplicações e Serviços", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200306", "name": "Tecnologia e Projeto de Antenas", "program": "MEEC", "dept": "DEEC", "track": "Sistemas de Computação", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200305", "name": "Tópicos de Fotónica", "program": "MEEC", "dept": "DEEC", "track": "Sistemas de Computação", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200308", "name": "Sistemas de Telecomunicações Via Rádio", "program": "MEEC", "dept": "DEEC", "track": "Telecomunicações", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-1127428915200309", "name": "Sistemas de Comunicações Móveis", "program": "MEEC", "dept": "DEEC", "track": "Telecomunicações", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1127428915200307", "name": "Sistemas de Comunicações Óticas", "program": "MEEC", "dept": "DEEC", "track": "Telecomunicações", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-564478961778819", "name": "Comunicação em Engenharia", "program": "MEEC", "dept": "DEEC", "track": "Opções Livres", "credits": 3.0, "semester": 1, "periods": [1]}, {"id": "meec-283003985068537", "name": "Filtros Analógicos e Digitais", "program": "MEEC", "dept": "DEEC", "track": "Opções Livres", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meec-564478961778820", "name": "Prática de Engenharia", "program": "MEEC", "dept": "DEEC", "track": "Opções Livres", "credits": 3.0, "semester": 1, "periods": [2]}, {"id": "meec-845953938490258", "name": "Atividades Extracurriculares I", "program": "MEEC", "dept": "DEEC", "track": "Opções Livres", "credits": 3.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-845953938490259", "name": "Atividades Extracurriculares II", "program": "MEEC", "dept": "DEEC", "track": "Opções Livres", "credits": 3.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-1408903891911293", "name": "Instrumentação e Medidas", "program": "MEEC", "dept": "DEEC", "track": "Opções Livres", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meec-283003985068538", "name": "Sistemas de Telecomunicações", "program": "MEEC", "dept": "DEEC", "track": "Opções Livres", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meic-ADSI", "name": "Administração de Dados e Sistemas de Informação", "name_en": "Data and Information Systems Management", "acronym": "ADSI", "program": "MEIC-A", "dept": "DEI", "track": "SI", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-AA", "name": "Algoritmos Avançados", "name_en": "Advanced Algorithms", "acronym": "AA", "program": "MEIC-A", "dept": "DEI", "track": "MTP", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-ALC", "name": "Algoritmos para Lógica Computacional", "name_en": "Algorithms for Computational Logic", "acronym": "ALC", "program": "MEIC-A", "dept": "DEI", "track": "MTP", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-AIIC", "name": "Ambientes Inteligentes e Internet das Coisas", "name_en": "Ambient Intelligence and Internet of Things", "acronym": "AIIC", "program": "MEIC-A", "dept": "DEI", "track": "ASO", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-AES", "name": "Análise e Especificação de Software", "name_en": "Software Analysis and Specification", "acronym": "AES", "program": "MEIC-A", "dept": "DEI", "track": "MTP", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-AID", "name": "Análise e Integração de Dados", "name_en": "Data Analysis and Integration", "acronym": "AID", "program": "MEIC-A", "dept": "DEI", "track": "SI", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-AIP", "name": "Análise Inteligente de Processos", "name_en": "Intelligent Process Analysis", "acronym": "AIP", "program": "MEIC-A", "dept": "DEI", "track": "SI", "credits": 6.0, "semester": 2, "periods": [4]}, {"id": "meic-AVTM", "name": "Animação e Visualização Tridimensional Móvel", "name_en": "Mobile Three-Dimensional Visualization and Animation", "acronym": "AVTM", "program": "MEIC-A", "dept": "DEI", "track": "IG", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-AProf", "name": "Aprendizagem Profunda (DEI)", "name_en": "Deep Learning (DEI)", "acronym": "AProf", "program": "MEIC-A", "dept": "DEI", "track": "IA", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meic-AS", "name": "Arquitectura de Software", "name_en": "Software Architecture", "acronym": "AS", "program": "MEIC-A", "dept": "DEI", "track": "MTP", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meic-AE", "name": "Arquitetura Empresarial", "name_en": "Enterprise Architecture", "acronym": "AE", "program": "MEIC-A", "dept": "DEI", "track": "SI", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-BC", "name": "Biologia Computacional", "name_en": "Computational Biology", "acronym": "BC", "program": "MEIC-A", "dept": "DEI", "track": "MTP", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-CSF", "name": "Ciber Segurança Forense", "name_en": "Forensics Cyber-Security", "acronym": "CSF", "program": "MEIC-A", "dept": "DEI", "track": "ASO", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-CD", "name": "Ciência de Dados", "name_en": "Data Science", "acronym": "CD", "program": "MEIC-A", "dept": "DEI", "track": "SI", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meic-CRC", "name": "Ciência de Redes Complexas", "name_en": "Network Science", "acronym": "CRC", "program": "MEIC-A", "dept": "DEI", "track": "MTP", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-CNV", "name": "Computação em Nuvem e Virtualização", "name_en": "Cloud Computing and Virtualization", "acronym": "CNV", "program": "MEIC-A", "dept": "DEI", "track": "ASO", "credits": 6.0, "semester": 2, "periods": [4]}, {"id": "meic-CGJ", "name": "Computação Gráfica para Jogos", "name_en": "Computer Graphics for Games", "acronym": "CGJ", "program": "MEIC-A", "dept": "DEI", "track": "IG", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meic-CMU", "name": "Computação Móvel e Ubíqua", "name_en": "Mobile and Ubiquitous Computing", "acronym": "CMU", "program": "MEIC-A", "dept": "DEI", "track": "ASO", "credits": 6.0, "semester": 2, "periods": [4]}, {"id": "meic-CPD", "name": "Computação Paralela e Distribuída", "name_en": "Parallel and Distributed Computing", "acronym": "CPD", "program": "MEIC-A", "dept": "DEI", "track": "MTP", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-CV", "name": "Computação Visual", "name_en": "Visual Computing", "acronym": "CV", "program": "MEIC-A", "dept": "DEI", "track": "IG", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-CCU", "name": "Conceção Centrada no Utilizador", "name_en": "User-Centered Design and Evaluation", "acronym": "CCU", "program": "MEIC-A", "dept": "DEI", "track": "IG", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meic-DIRVAM", "name": "Desenho de Interação para Realidade Virtual, Aumentada e Mista", "name_en": "Interaction Design for Virtual, Augmented and Mixed Reality", "acronym": "DIRVAM", "program": "MEIC-A", "dept": "DEI", "track": "IG", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meic-DAD", "name": "Desenvolvimento de Aplicações Distribuídas", "name_en": "Design and Implementation of Distributed Applications", "acronym": "DAD", "program": "MEIC-A", "dept": "DEI", "track": "ASO", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-DJ", "name": "Design de Jogos", "name_en": "Game Design", "acronym": "DJ", "program": "MEIC-A", "dept": "DEI", "track": "IG", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-ESAD", "name": "Engenharia de Sistemas de Alto Desempenho", "name_en": "Software Performance Engineering", "acronym": "ESAD", "program": "MEIC-A", "dept": "DEI", "track": "ASO", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-ETPN", "name": "Engenharia e Tecnologia de Processos de Negócio", "name_en": "Business Process Engineering and Technology", "acronym": "ETPN", "program": "MEIC-A", "dept": "DEI", "track": "SI", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meic-EDI", "name": "Estúdio de Design de Interação", "name_en": "Interaction Design Studio", "acronym": "EDI", "program": "MEIC-A", "dept": "DEI", "track": "IG", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-GPI", "name": "Gestão de Projectos Informáticos", "name_en": "Information Systems Project Management", "acronym": "GPI", "program": "MEIC-A", "dept": "DEI", "track": "SI", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-IE", "name": "Integração Empresarial", "name_en": "Enterprise Integration", "acronym": "IE", "program": "MEIC-A", "dept": "DEI", "track": "SI", "credits": 6.0, "semester": 2, "periods": [4]}, {"id": "meic-IAES", "name": "Inteligência Artificial Explicável Simbólica", "name_en": "Symbolic Explainable Artificial Intelligence", "acronym": "IAES", "program": "MEIC-A", "dept": "DEI", "track": "IA", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-IAJ", "name": "Inteligência Artificial para Jogos", "name_en": "Artificial Intelligence in Games", "acronym": "IAJ", "program": "MEIC-A", "dept": "DEI", "track": "IA", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-IPIA", "name": "Interação Pessoa-IA", "name_en": "Human-AI Interaction", "acronym": "IPIA", "program": "MEIC-A", "dept": "DEI", "track": "IA", "credits": 6.0, "semester": 2, "periods": [4]}, {"id": "meic-LN", "name": "Língua Natural", "name_en": "Natural Language", "acronym": "LN", "program": "MEIC-A", "dept": "DEI", "track": "IA", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-LProg", "name": "Linguagens de Programação", "name_en": "Programming Languages", "acronym": "LProg", "program": "MEIC-A", "dept": "DEI", "track": "MTP", "credits": 6.0, "semester": 2, "periods": [4]}, {"id": "meic-MDJ", "name": "Metodologia de Desenvolvimento de Jogos", "name_en": "Game Development Methodology", "acronym": "MDJ", "program": "MEIC-A", "dept": "DEI", "track": "IG", "credits": 6.0, "semester": 2, "periods": [4]}, {"id": "meic-PADInt", "name": "Planeamento, Aprendizagem e Decisão Inteligente", "name_en": "Planning, learning and intelligent decision-making", "acronym": "PADInt", "program": "MEIC-A", "dept": "DEI", "track": "IA", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-PSIA", "name": "Plataformas de Suporte a IA", "name_en": "Platforms for AI Systems", "acronym": "PSIA", "program": "MEIC-A", "dept": "DEI", "track": "ASO", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-PCM", "name": "Produção de Conteúdos Multimédia", "name_en": "Multimedia Content Production", "acronym": "PCM", "program": "MEIC-A", "dept": "DEI", "track": "IG", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-P3D", "name": "Programação 3D", "name_en": "3D Programming", "acronym": "P3D", "program": "MEIC-A", "dept": "DEI", "track": "IG", "credits": 6.0, "semester": 2, "periods": [4]}, {"id": "meic-PAva", "name": "Programação Avançada", "name_en": "Advanced Programming", "acronym": "PAva", "program": "MEIC-A", "dept": "DEI", "track": "MTP", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-RSIHR", "name": "Robótica Social e Interação Humanos-Robôs", "name_en": "Social Robotics and Human-Robot Interaction", "acronym": "RSIHR", "program": "MEIC-A", "dept": "DEI", "track": "IA", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meic-SGSI", "name": "Segurança e Gestão de Sistemas de Informação", "name_en": "Security and Management of Information Systems", "acronym": "SGSI", "program": "MEIC-A", "dept": "DEI", "track": "SI", "credits": 6.0, "semester": 2, "periods": [4]}, {"id": "meic-SegSoft", "name": "Segurança em Software", "name_en": "Software Security", "acronym": "SegSoft", "program": "MEIC-A", "dept": "DEI", "track": "MTP", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meic-SIRS", "name": "Segurança Informática em Redes e Sistemas", "name_en": "Network and Computer Security", "acronym": "SIRS", "program": "MEIC-A", "dept": "DEI", "track": "ASO", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meic-SEC", "name": "Sistemas de Elevada Confiabilidade", "name_en": "Highly Dependable Systems", "acronym": "SEC", "program": "MEIC-A", "dept": "DEI", "track": "ASO", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-SIP", "name": "Sistemas Inteligentes de Pesquisa", "name_en": "Intelligent Retrieval Systems", "acronym": "SIP", "program": "MEIC-A", "dept": "DEI", "track": "SI", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-TIDB", "name": "Tecnologias de Informação e Decisão Biomédica", "name_en": "Biomedical Decision and Information Technology", "acronym": "TIDB", "program": "MEIC-A", "dept": "DEI", "track": "SI", "credits": 6.0, "semester": 2, "periods": [3]}, {"id": "meic-TVS", "name": "Teste e Validação de Software", "name_en": "Software Testing and Validation", "acronym": "TVS", "program": "MEIC-A", "dept": "DEI", "track": "MTP", "credits": 6.0, "semester": 2, "periods": [4]}, {"id": "meic-VI", "name": "Visualização de Informação", "name_en": "Information Visualization", "acronym": "VI", "program": "MEIC-A", "dept": "DEI", "track": "IG", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-CC", "name": "Computabilidade e Complexidade", "name_en": "Computability and Complexity", "acronym": "CC", "program": "MEIC-A", "dept": "DM", "track": "LogCom", "credits": 6.0, "semester": 1, "periods": [1, 2]}, {"id": "meic-CPS", "name": "Criptografia e Protocolos de Segurança", "name_en": "Cryptography and Security Protocols", "acronym": "CPS", "program": "MEIC-A", "dept": "DM", "track": "LogCom", "credits": 6.0, "semester": 2, "periods": [3, 4]}, {"id": "meic-DDRS", "name": "Desempenho e Dimensionamento de Redes e Sistemas", "name_en": "Performance Evaluation and Dimensioning of Networks and Systems", "acronym": "DDRS", "program": "MEIC-A", "dept": "DEEC", "track": "Comp", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meic-IR", "name": "Introdução à Robótica", "name_en": "Introduction to Robotics", "acronym": "IR", "program": "MEIC-A", "dept": "DEEC", "track": "SDC", "credits": 6.0, "semester": 1, "periods": [1]}, {"id": "meic-PF", "name": "Processamento da Fala", "name_en": "Spoken Language Processing", "acronym": "PF", "program": "MEIC-A", "dept": "DEEC", "track": "SDC", "credits": 6.0, "semester": 2, "periods": [4]}, {"id": "meic-PIV", "name": "Processamento de Imagem e Visão", "name_en": "Image Processing and Vision", "acronym": "PIV", "program": "MEIC-A", "dept": "DEEC", "track": "SDC", "credits": 6.0, "semester": 1, "periods": [2]}, {"id": "meic-SRM", "name": "Sistemas Robóticos em Manipulação", "name_en": "Robotic Systems in Manipulation", "acronym": "SRM", "program": "MEIC-A", "dept": "DEM", "track": "CAII", "credits": 6.0, "semester": 2, "periods": [4]}];
+
+const SLOTS = [
+  {key: 'y1s1', year: 1, sem: 1, label: '第一年 · 第一学期 (Y1S1)'},
+  {key: 'y1s2', year: 1, sem: 2, label: '第一年 · 第二学期 (Y1S2)'},
+  {key: 'y2s1', year: 2, sem: 1, label: '第二年 · 第一学期 (Y2S1)'},
+  {key: 'y2s2', year: 2, sem: 2, label: '第二年 · 第二学期 (Y2S2)'},
+];
+
+const FIXED = {
+  y2s1: [{id: 'fixed-pic', name: 'PIC · 二级项目 (Projeto Integrador)', credits: 12}],
+  y2s2: [{id: 'fixed-tese', name: 'Tese · 硕士论文 (Dissertação)', credits: 30}],
+};
+
+const MAX_CREDITS = 36;
+const STORAGE_KEY = 'course-plan-v1';
+
+let selections = loadSelections();
+
+function loadSelections() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) {}
+  return {y1s1: [], y1s2: [], y2s1: [], y2s2: []};
+}
+function saveSelections() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(selections));
+}
+function resetAll() {
+  if (!confirm('确定要清空所有已选课程吗？')) return;
+  selections = {y1s1: [], y1s2: [], y2s1: [], y2s2: []};
+  saveSelections();
+  renderAll();
+}
+
+function courseById(id) {
+  return COURSES.find(c => c.id === id);
+}
+
+function isSelectedAnywhere(id) {
+  return Object.values(selections).some(arr => arr.includes(id));
+}
+
+function addCourse(slotKey, courseId) {
+  if (isSelectedAnywhere(courseId)) return;
+  selections[slotKey].push(courseId);
+  saveSelections();
+  renderAll();
+}
+function removeCourse(slotKey, courseId) {
+  selections[slotKey] = selections[slotKey].filter(id => id !== courseId);
+  saveSelections();
+  renderAll();
+}
+
+function slotCredits(slotKey) {
+  const fixed = (FIXED[slotKey] || []).reduce((s, c) => s + c.credits, 0);
+  const chosen = selections[slotKey].reduce((s, id) => {
+    const c = courseById(id);
+    return s + (c ? c.credits : 0);
+  }, 0);
+  return fixed + chosen;
+}
+
+function barColor(used) {
+  if (used > MAX_CREDITS) return 'var(--danger)';
+  if (used >= MAX_CREDITS - 3) return 'var(--warn)';
+  return 'var(--ok)';
+}
+
+function renderSemesters() {
+  const root = document.getElementById('semesters');
+  root.innerHTML = '';
+  SLOTS.forEach(slot => {
+    const used = slotCredits(slot.key);
+    const pct = Math.min(100, (used / MAX_CREDITS) * 100);
+    const card = document.createElement('div');
+    card.className = 'sem-card';
+    const over = used > MAX_CREDITS ? ' ⚠ 超出上限' : '';
+    card.innerHTML = `
+      <div class="sem-head">
+        <h2>${slot.label}</h2>
+        <span class="sem-credit-label" style="color:${barColor(used)}">${used} / ${MAX_CREDITS} ECTS${over}</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:${barColor(used)}"></div></div>
+      <div class="chip-list"></div>
+    `;
+    const list = card.querySelector('.chip-list');
+
+    (FIXED[slot.key] || []).forEach(fc => {
+      const chip = document.createElement('div');
+      chip.className = 'course-chip locked';
+      chip.innerHTML = `<span class="tag fixed">锁定</span><span class="name">${fc.name}</span><span class="cred">${fc.credits} ECTS</span>`;
+      list.appendChild(chip);
+    });
+
+    if (selections[slot.key].length === 0 && !(FIXED[slot.key] && FIXED[slot.key].length)) {
+      const hint = document.createElement('div');
+      hint.className = 'empty-hint';
+      hint.textContent = '尚未添加课程，请从右侧目录选择';
+      list.appendChild(hint);
+    }
+
+    selections[slot.key].forEach(id => {
+      const c = courseById(id);
+      if (!c) return;
+      const chip = document.createElement('div');
+      chip.className = 'course-chip';
+      const tagClass = c.program === 'MEEC' ? 'meec' : 'meic';
+      chip.innerHTML = `
+        <span class="tag ${tagClass}">${c.program}</span>
+        <span class="name">${c.name}</span>
+        <span class="cred">${c.credits} ECTS</span>
+        <button class="remove" title="移除">×</button>
+      `;
+      chip.querySelector('.remove').onclick = () => removeCourse(slot.key, id);
+      list.appendChild(chip);
+    });
+
+    root.appendChild(card);
+  });
+}
+
+function renderProgramFilters() {
+  const root = document.getElementById('programFilters');
+  root.innerHTML = `
+    <label><input type="checkbox" value="MEEC" checked> MEEC</label>
+    <label><input type="checkbox" value="MEIC-A" checked> MEIC-A</label>
+    <label><input type="checkbox" value="1" class="semf" checked> 第一学期课程</label>
+    <label><input type="checkbox" value="2" class="semf" checked> 第二学期课程</label>
+  `;
+  root.querySelectorAll('input').forEach(inp => inp.addEventListener('change', renderCatalog));
+}
+
+function renderTrackFilter() {
+  const sel = document.getElementById('trackFilter');
+  const tracks = Array.from(new Set(COURSES.map(c => c.track).filter(Boolean))).sort();
+  sel.innerHTML = '<option value="">全部方向 / 领域</option>' + tracks.map(t => `<option value="${t}">${t}</option>`).join('');
+  sel.addEventListener('change', renderCatalog);
+}
+
+function renderCatalog() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const programs = Array.from(document.querySelectorAll('#programFilters input[type=checkbox]:not(.semf)'))
+    .filter(i => i.checked).map(i => i.value);
+  const sems = Array.from(document.querySelectorAll('#programFilters input.semf'))
+    .filter(i => i.checked).map(i => i.value);
+  const track = document.getElementById('trackFilter').value;
+
+  const filtered = COURSES.filter(c => {
+    if (!programs.includes(c.program)) return false;
+    if (!sems.includes(String(c.semester))) return false;
+    if (track && c.track !== track) return false;
+    if (q) {
+      const hay = (c.name + ' ' + (c.name_en||'') + ' ' + (c.acronym||'') + ' ' + (c.track||'')).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  }).sort((a,b) => a.name.localeCompare(b.name, 'pt'));
+
+  const root = document.getElementById('catalog');
+  root.innerHTML = '';
+  document.getElementById('catalogCount').textContent = filtered.length;
+
+  filtered.forEach(c => {
+    const el = document.createElement('div');
+    el.className = 'cat-item';
+    const taken = isSelectedAnywhere(c.id);
+    const tagClass = c.program === 'MEEC' ? 'meec' : 'meic';
+    const periodStr = c.period ? ` · P${c.period}` : '';
+    el.innerHTML = `
+      <div class="top">
+        <span class="tag ${tagClass}">${c.program}</span>
+        <span class="name">${c.name}</span>
+      </div>
+      <div class="meta">${c.credits} ECTS · 第${c.semester}学期${periodStr} · ${c.track || ''}${c.acronym ? ' · '+c.acronym : ''}</div>
+      <div class="actions"></div>
+    `;
+    const actions = el.querySelector('.actions');
+    if (taken) {
+      const btn = document.createElement('button');
+      btn.textContent = '已加入课表';
+      btn.disabled = true;
+      actions.appendChild(btn);
+    } else {
+      SLOTS.filter(s => s.sem === c.semester).forEach(s => {
+        const btn = document.createElement('button');
+        btn.textContent = `+ ${s.label.split(' · ')[0]}`;
+        btn.onclick = () => addCourse(s.key, c.id);
+        actions.appendChild(btn);
+      });
+    }
+    root.appendChild(el);
+  });
+}
+
+function renderAll() {
+  renderSemesters();
+  renderCatalog();
+}
+
+document.getElementById('searchInput').addEventListener('input', renderCatalog);
+renderProgramFilters();
+renderTrackFilter();
+renderAll();
+</script>
+</body>
+</html>
