@@ -139,6 +139,27 @@
   .course-chip button.remove:hover { color: var(--danger); }
   .empty-hint { color: var(--muted); font-size: 12.5px; padding: 6px 2px; }
 
+  .fixed-toggle-row {
+    background: var(--accent-bg);
+    border: 1px solid rgba(59,111,224,.3);
+    border-radius: 9px;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+  }
+  .fixed-toggle-row.off {
+    background: var(--panel2);
+    border-style: dashed;
+    border-color: var(--border);
+  }
+  .fixed-toggle {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; cursor: pointer;
+  }
+  .fixed-toggle input { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; }
+  .fixed-toggle .name { flex: 1; }
+  .fixed-toggle .cred { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .fixed-toggle-row.off .fixed-toggle { color: var(--muted); }
+
   .period-block { margin-bottom: 10px; }
   .period-block-label {
     font-size: 10.5px; font-weight: 700; color: var(--muted);
@@ -485,15 +506,20 @@ const MAX_CREDITS = 36;
 const STORAGE_KEY = 'course-plan-v1';
 const PLANS_KEY = 'course-plans-v1';
 const SCHEDULE_KEY = 'course-schedule-v1';
+const FIXED_TOGGLES_KEY = 'course-fixed-toggles-v1';
 
 function emptySelections() {
   return {y1s1: [], y1s2: [], y2s1: [], y2s2: []};
+}
+function defaultFixedToggles() {
+  return {y2s1: true, y2s2: true};
 }
 
 let selections = loadSelections();
 let savedPlans = loadPlans();
 let compareChecked = [];
 let schedule = loadSchedule();
+let fixedToggles = loadFixedToggles();
 let currentView = 'plan';
 let currentSlot = 'y1s1';
 
@@ -527,6 +553,21 @@ function loadSchedule() {
 function saveSchedule() {
   localStorage.setItem(SCHEDULE_KEY, JSON.stringify(schedule));
 }
+function loadFixedToggles() {
+  try {
+    const raw = localStorage.getItem(FIXED_TOGGLES_KEY);
+    if (raw) return Object.assign(defaultFixedToggles(), JSON.parse(raw));
+  } catch (e) {}
+  return defaultFixedToggles();
+}
+function saveFixedToggles() {
+  localStorage.setItem(FIXED_TOGGLES_KEY, JSON.stringify(fixedToggles));
+}
+function setFixedToggle(slotKey, checked) {
+  fixedToggles[slotKey] = checked;
+  saveFixedToggles();
+  renderPlanView();
+}
 
 function resetAll() {
   if (!confirm('确定要清空当前草稿吗？已保存的方案不会受影响。')) return;
@@ -552,9 +593,11 @@ function removeCourse(slotKey, courseId) {
   renderPlanView();
 }
 
-function slotCredits(slotKey, sel) {
+function slotCredits(slotKey, sel, toggles) {
   sel = sel || selections;
-  const fixed = (FIXED[slotKey] || []).reduce((s, c) => s + c.credits, 0);
+  toggles = toggles || fixedToggles;
+  const fixedActive = (toggles[slotKey] !== false) ? (FIXED[slotKey] || []) : [];
+  const fixed = fixedActive.reduce((s, c) => s + c.credits, 0);
   const chosen = (sel[slotKey] || []).reduce((s, id) => {
     const c = courseById(id);
     return s + (c ? c.credits : 0);
@@ -626,6 +669,7 @@ function renderSemesters() {
         <span class="sem-credit-label" style="color:${barColor(used)}">${used} / ${MAX_CREDITS} ECTS${over}</span>
       </div>
       <div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:${barColor(used)}"></div></div>
+      <div class="fixed-toggle-slot"></div>
       <div class="period-block span-block">
         <div class="period-block-label">贯穿整学期 (P${pA}+P${pB})</div>
         <div class="chip-list span-list"></div>
@@ -644,15 +688,29 @@ function renderSemesters() {
     const spanList = card.querySelector('.span-list');
     const paList = card.querySelector('.pa-list');
     const pbList = card.querySelector('.pb-list');
+    const fixedSlot = card.querySelector('.fixed-toggle-slot');
 
-    (FIXED[slot.key] || []).forEach(fc => spanList.appendChild(makeChip(fc, {locked: true, span: true})));
+    (FIXED[slot.key] || []).forEach(fc => {
+      const checked = fixedToggles[slot.key] !== false;
+      const row = document.createElement('div');
+      row.className = 'fixed-toggle-row' + (checked ? '' : ' off');
+      row.innerHTML = `
+        <label class="fixed-toggle">
+          <input type="checkbox" ${checked ? 'checked' : ''}>
+          <span class="name">${fc.name}</span>
+          <span class="cred">${fc.credits} ECTS</span>
+        </label>
+      `;
+      row.querySelector('input').addEventListener('change', (e) => setFixedToggle(slot.key, e.target.checked));
+      fixedSlot.appendChild(row);
+    });
 
     const chosen = selections[slot.key].map(id => courseById(id)).filter(Boolean);
     const spanCourses = chosen.filter(c => c.periods.length === 2);
     const paCourses = chosen.filter(c => c.periods.length === 1 && c.periods[0] === pA);
     const pbCourses = chosen.filter(c => c.periods.length === 1 && c.periods[0] === pB);
 
-    if (spanCourses.length === 0 && !(FIXED[slot.key] && FIXED[slot.key].length)) {
+    if (spanCourses.length === 0) {
       const hint = document.createElement('div');
       hint.className = 'empty-hint';
       hint.textContent = '暂无贯穿整学期的课程';
@@ -770,6 +828,7 @@ function saveCurrentAsPlan() {
     name: name.trim(),
     createdAt: Date.now(),
     selections: JSON.parse(JSON.stringify(selections)),
+    fixedToggles: JSON.parse(JSON.stringify(fixedToggles)),
   });
   savePlansToStorage();
   renderPlansList();
@@ -780,7 +839,9 @@ function loadPlan(id) {
   if (!plan) return;
   if (!confirm(`载入方案「${plan.name}」将替换当前草稿的选课，确定吗？`)) return;
   selections = JSON.parse(JSON.stringify(plan.selections));
+  fixedToggles = Object.assign(defaultFixedToggles(), plan.fixedToggles || {});
   saveSelections();
+  saveFixedToggles();
   renderPlanView();
 }
 
@@ -820,8 +881,8 @@ function fmtDate(ts) {
   return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
-function planTotalCredits(sel) {
-  return SLOTS.reduce((s, slot) => s + slotCredits(slot.key, sel), 0);
+function planTotalCredits(sel, toggles) {
+  return SLOTS.reduce((s, slot) => s + slotCredits(slot.key, sel, toggles), 0);
 }
 
 function renderPlansList() {
@@ -837,7 +898,7 @@ function renderPlansList() {
       row.innerHTML = `
         <input type="checkbox" title="勾选以加入对比（最多两个）" ${checked ? 'checked' : ''}>
         <span class="pname">${plan.name}</span>
-        <span class="pmeta">${planTotalCredits(plan.selections)} ECTS · ${fmtDate(plan.createdAt)}</span>
+        <span class="pmeta">${planTotalCredits(plan.selections, plan.fixedToggles)} ECTS · ${fmtDate(plan.createdAt)}</span>
         <span class="pactions">
           <button class="load-btn">载入</button>
           <button class="rename-btn">重命名</button>
@@ -872,7 +933,7 @@ function openCompare() {
   let html = `
     <button class="modal-close" onclick="closeCompare()">×</button>
     <h2>方案对比：${planA.name} vs ${planB.name}</h2>
-    <div class="modal-sub">保存时间：${fmtDate(planA.createdAt)} / ${fmtDate(planB.createdAt)} &nbsp;·&nbsp; 总学分：${planTotalCredits(planA.selections)} ECTS / ${planTotalCredits(planB.selections)} ECTS</div>
+    <div class="modal-sub">保存时间：${fmtDate(planA.createdAt)} / ${fmtDate(planB.createdAt)} &nbsp;·&nbsp; 总学分：${planTotalCredits(planA.selections, planA.fixedToggles)} ECTS / ${planTotalCredits(planB.selections, planB.fixedToggles)} ECTS</div>
     <div class="compare-row" style="margin-bottom:8px;">
       <div class="compare-col-head" style="color:var(--meec)">${planA.name}</div>
       <div class="compare-col-head" style="color:var(--meic)">${planB.name}</div>
@@ -892,9 +953,20 @@ function openCompare() {
       return `<div class="diff-item ${cls}">${c.name} <span style="color:var(--muted)">· ${c.credits} ECTS</span></div>`;
     };
 
+    const fixedItems = FIXED[slot.key] || [];
+    const fixedRow = fixedItems.length ? `
+          <div class="diff-list">
+            ${fixedItems.map(fc => `<div class="diff-item">${fc.name} <span style="color:var(--muted)">· ${(planA.fixedToggles||{})[slot.key] !== false ? '包含' : '不包含'} · ${fc.credits} ECTS</span></div>`).join('')}
+          </div>
+          <div class="diff-list">
+            ${fixedItems.map(fc => `<div class="diff-item">${fc.name} <span style="color:var(--muted)">· ${(planB.fixedToggles||{})[slot.key] !== false ? '包含' : '不包含'} · ${fc.credits} ECTS</span></div>`).join('')}
+          </div>
+    ` : '';
+
     html += `
       <div class="compare-slot">
         <div class="compare-slot-title">${slot.label}</div>
+        <div class="compare-row">${fixedRow}</div>
         <div class="compare-row">
           <div class="diff-list">
             ${common.map(id => renderItem(id, 'common')).join('') || ''}
@@ -908,8 +980,8 @@ function openCompare() {
           </div>
         </div>
         <div class="compare-credit-summary">
-          <span>${planA.name}: ${slotCredits(slot.key, planA.selections)} ECTS</span>
-          <span>${planB.name}: ${slotCredits(slot.key, planB.selections)} ECTS</span>
+          <span>${planA.name}: ${slotCredits(slot.key, planA.selections, planA.fixedToggles)} ECTS</span>
+          <span>${planB.name}: ${slotCredits(slot.key, planB.selections, planB.fixedToggles)} ECTS</span>
         </div>
       </div>
     `;
