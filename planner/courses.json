@@ -4,12 +4,14 @@
     "name": "Empreendedorismo, Inovação e Transferência de Tecnologia",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Tronco Comum",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Tronco Comum"
     ]
   },
   {
@@ -17,12 +19,14 @@
     "name": "Gestão de Projectos de Engenharia",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Tronco Comum",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Tronco Comum"
     ]
   },
   {
@@ -30,12 +34,14 @@
     "name": "Sistemas de Medida de Grande Escala",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos"
     ]
   },
   {
@@ -43,12 +49,16 @@
     "name": "Sistemas de Tempo Real",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos",
+      "Sistemas Ciberfísicos",
+      "Sistemas de Computação"
     ]
   },
   {
@@ -56,12 +66,15 @@
     "name": "Arquitecturas para Computação de Elevado Desempenho",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Dispositivos e Interface com o Meio Físico",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos",
+      "Sistemas de Computação"
     ]
   },
   {
@@ -69,12 +82,17 @@
     "name": "Redes Móveis e Internet das Coisas",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Aplicações",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos",
+      "Redes e Sistemas de Comunicação",
+      "Sistemas Ciberfísicos",
+      "Telecomunicações"
     ]
   },
   {
@@ -82,12 +100,15 @@
     "name": "Sensores e Actuadores",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos",
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -95,12 +116,15 @@
     "name": "Sistemas de Processamento Digital de Sinal",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Energia",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos",
+      "Sistemas de Computação"
     ]
   },
   {
@@ -108,12 +132,16 @@
     "name": "Tecnologias dos Sistemas de Computação",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos",
+      "Sistemas Ciberfísicos",
+      "Sistemas de Computação"
     ]
   },
   {
@@ -121,12 +149,14 @@
     "name": "Circuitos de Ultra-Baixo Consumo",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos"
     ]
   },
   {
@@ -134,12 +164,14 @@
     "name": "Electrónica de Potência",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos"
     ]
   },
   {
@@ -147,11 +179,13 @@
     "name": "Nanotecnologias",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos"
     ]
   },
   {
@@ -159,12 +193,15 @@
     "name": "Projecto de Sistemas Digitais",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos",
+      "Sistemas de Computação"
     ]
   },
   {
@@ -172,12 +209,14 @@
     "name": "Sistemas em Circuito Integrado",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos"
     ]
   },
   {
@@ -185,12 +224,14 @@
     "name": "Sistemas Integrados Analógicos e Mistos",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos"
     ]
   },
   {
@@ -198,12 +239,14 @@
     "name": "Microeletrónica",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos"
     ]
   },
   {
@@ -211,12 +254,15 @@
     "name": "Optoeletrónica",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos",
+      "Telecomunicações"
     ]
   },
   {
@@ -224,12 +270,14 @@
     "name": "Sistemas Integrados de Radiofrequência",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Circuitos e Sistemas Eletrónicos"
     ]
   },
   {
@@ -237,12 +285,15 @@
     "name": "Controlo de Sistemas Ciberfísicos",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Aplicações",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial",
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -250,12 +301,14 @@
     "name": "Robótica",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial"
     ]
   },
   {
@@ -263,12 +316,14 @@
     "name": "Controlo Multivariável, Não-Linear e Ótimo",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial"
     ]
   },
   {
@@ -276,12 +331,14 @@
     "name": "Estimação e Controlo Preditivo Distribuído",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial"
     ]
   },
   {
@@ -289,12 +346,14 @@
     "name": "Modelação e Automação de Processos Industriais",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial"
     ]
   },
   {
@@ -302,12 +361,16 @@
     "name": "Optimização e Algoritmos",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Aplicações e Serviços",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial",
+      "Sistemas de Computação",
+      "Telecomunicações"
     ]
   },
   {
@@ -315,12 +378,14 @@
     "name": "Processamento Digital de Sinais",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial"
     ]
   },
   {
@@ -328,12 +393,14 @@
     "name": "Sistemas de Controlo Distribuído em Tempo Real",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial"
     ]
   },
   {
@@ -341,12 +408,14 @@
     "name": "Inteligência Artificial e Sistemas de Decisão",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial"
     ]
   },
   {
@@ -354,12 +423,14 @@
     "name": "Processamento de Imagem e Visão",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial"
     ]
   },
   {
@@ -367,12 +438,14 @@
     "name": "Processamento da Fala",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial"
     ]
   },
   {
@@ -380,12 +453,15 @@
     "name": "Programação de Sistemas",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial",
+      "Sistemas de Computação"
     ]
   },
   {
@@ -393,12 +469,15 @@
     "name": "Sistemas Autónomos",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Aplicações",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial",
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -406,12 +485,16 @@
     "name": "Aprendizagem Automática",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Aplicações e Serviços",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial",
+      "Redes e Sistemas de Comunicação",
+      "Telecomunicações"
     ]
   },
   {
@@ -419,11 +502,14 @@
     "name": "Aprendizagem Profunda",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Arquiteturas e Computação",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial",
+      "Sistemas de Computação"
     ]
   },
   {
@@ -431,12 +517,15 @@
     "name": "Processamento de Big Data",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Controlo, Robótica e Inteligência Artificial",
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -444,12 +533,14 @@
     "name": "Alta Tensão",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -457,12 +548,14 @@
     "name": "Análise de Redes",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -470,12 +563,14 @@
     "name": "Economia e Mercados de Energia",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -483,12 +578,14 @@
     "name": "Produção e Consumo de Energia Eléctrica",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -496,12 +593,14 @@
     "name": "Proteção de Sistemas de Energia",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -509,12 +608,15 @@
     "name": "Analítica de Dados para Redes Inteligentes",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Energia",
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -522,12 +624,14 @@
     "name": "Controlo e Optimização de Sistemas de Energia",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -535,12 +639,14 @@
     "name": "Regimes Transitórios em Redes",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -548,12 +654,14 @@
     "name": "Accionamentos e Veículos Eléctricos",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -561,12 +669,14 @@
     "name": "Máquinas Eléctricas",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -574,12 +684,14 @@
     "name": "Energias Renováveis e Produção Descentralizada",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -587,12 +699,14 @@
     "name": "Sistemas Elétricos Integrados de Tecnologia Solar Fotovoltaica",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -600,12 +714,14 @@
     "name": "Conversão Electrónica e Armazenamento de Energia",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -613,12 +729,14 @@
     "name": "Eletrónica de Potência para Energia",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -626,12 +744,14 @@
     "name": "Conversores Comutados para Energias Renováveis",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Energia"
     ]
   },
   {
@@ -639,12 +759,15 @@
     "name": "Microredes Dc/Ac",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Circuitos e Sistemas Eletrónicos",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Energia",
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -652,12 +775,15 @@
     "name": "Aplicações Distribuídas sobre a Internet",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação",
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -665,12 +791,15 @@
     "name": "Aplicações e Tecnologias Móveis",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Sistemas Ciberfísicos",
+      "Sistemas de Computação"
     ]
   },
   {
@@ -678,12 +807,14 @@
     "name": "Redes Elétricas Inteligentes",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Aplicações",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -691,12 +822,14 @@
     "name": "Instalações e Edifícios Inteligentes",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Controlo, Robótica e Inteligência Artificial",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -704,12 +837,16 @@
     "name": "Segurança das Comunicações",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Aplicações",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação",
+      "Sistemas Ciberfísicos",
+      "Sistemas de Computação"
     ]
   },
   {
@@ -717,12 +854,15 @@
     "name": "Computação Inteligente",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Arquiteturas e Computação",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Sistemas Ciberfísicos",
+      "Sistemas de Computação"
     ]
   },
   {
@@ -730,12 +870,15 @@
     "name": "Radiopropagação para Comunicações e Sensores",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Aplicações",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Sistemas Ciberfísicos",
+      "Telecomunicações"
     ]
   },
   {
@@ -743,12 +886,14 @@
     "name": "Computação em Sistemas Paralelos e Heterogéneos",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Dispositivos e Interface com o Meio Físico",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Sistemas de Computação"
     ]
   },
   {
@@ -756,11 +901,13 @@
     "name": "Computação Paralela e Distribuída",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Dispositivos e Interface com o Meio Físico",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Sistemas de Computação"
     ]
   },
   {
@@ -768,12 +915,14 @@
     "name": "Co-Projeto Hardware/Software",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Dispositivos e Interface com o Meio Físico",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Sistemas de Computação"
     ]
   },
   {
@@ -781,12 +930,15 @@
     "name": "Programação Orientada por Objectos",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Energia",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação",
+      "Sistemas de Computação"
     ]
   },
   {
@@ -794,12 +946,14 @@
     "name": "Automação do Projeto Eletrónico",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Arquiteturas e Computação",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Sistemas de Computação"
     ]
   },
   {
@@ -807,12 +961,15 @@
     "name": "Algoritmia em Redes e Aplicações",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Telecomunicações",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação",
+      "Telecomunicações"
     ]
   },
   {
@@ -820,12 +977,14 @@
     "name": "Desempenho e Dimensionamento de Redes e Sistemas",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Energia",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação"
     ]
   },
   {
@@ -833,12 +992,15 @@
     "name": "Teoria da Informação e Comunicação",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Aplicações e Serviços",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação",
+      "Telecomunicações"
     ]
   },
   {
@@ -846,12 +1008,15 @@
     "name": "Transmissão Digital",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Aplicações e Serviços",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação",
+      "Telecomunicações"
     ]
   },
   {
@@ -859,12 +1024,15 @@
     "name": "Comunicação Multimédia",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Aplicações e Serviços",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação",
+      "Telecomunicações"
     ]
   },
   {
@@ -872,12 +1040,15 @@
     "name": "Redes de Alto Débito",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Redes e Sistemas de Comunicação",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação",
+      "Telecomunicações"
     ]
   },
   {
@@ -885,12 +1056,14 @@
     "name": "Redes Veiculares",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Redes e Sistemas de Comunicação",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação"
     ]
   },
   {
@@ -898,12 +1071,14 @@
     "name": "Arquitectura e Gestão de Redes",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Redes e Sistemas de Comunicação",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação"
     ]
   },
   {
@@ -911,12 +1086,14 @@
     "name": "Sistemas de Navegação",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Redes e Sistemas de Comunicação",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação"
     ]
   },
   {
@@ -924,12 +1101,14 @@
     "name": "Redes Programáveis",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Redes e Sistemas de Comunicação",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação"
     ]
   },
   {
@@ -937,11 +1116,13 @@
     "name": "Sistemas de Informação e Bases de Dados",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Redes e Sistemas de Comunicação",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Redes e Sistemas de Comunicação"
     ]
   },
   {
@@ -949,12 +1130,14 @@
     "name": "Processamento Multimédia Baseado em Aprendizagem",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Aplicações e Serviços",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Telecomunicações"
     ]
   },
   {
@@ -962,12 +1145,14 @@
     "name": "Tecnologia e Projeto de Antenas",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Sistemas de Computação",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Telecomunicações"
     ]
   },
   {
@@ -975,12 +1160,14 @@
     "name": "Tópicos de Fotónica",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Sistemas de Computação",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Telecomunicações"
     ]
   },
   {
@@ -988,12 +1175,14 @@
     "name": "Sistemas de Telecomunicações Via Rádio",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Telecomunicações",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Telecomunicações"
     ]
   },
   {
@@ -1001,12 +1190,14 @@
     "name": "Sistemas de Comunicações Móveis",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Telecomunicações",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Telecomunicações"
     ]
   },
   {
@@ -1014,12 +1205,14 @@
     "name": "Sistemas de Comunicações Óticas",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Telecomunicações",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Telecomunicações"
     ]
   },
   {
@@ -1027,11 +1220,13 @@
     "name": "Comunicação em Engenharia",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Opções Livres",
     "credits": 3.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Opções Livres"
     ]
   },
   {
@@ -1039,12 +1234,14 @@
     "name": "Filtros Analógicos e Digitais",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Opções Livres",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Opções Livres"
     ]
   },
   {
@@ -1052,11 +1249,13 @@
     "name": "Prática de Engenharia",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Opções Livres",
     "credits": 3.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Opções Livres"
     ]
   },
   {
@@ -1064,12 +1263,14 @@
     "name": "Atividades Extracurriculares I",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Opções Livres",
     "credits": 3.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Opções Livres"
     ]
   },
   {
@@ -1077,12 +1278,14 @@
     "name": "Atividades Extracurriculares II",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Opções Livres",
     "credits": 3.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Opções Livres"
     ]
   },
   {
@@ -1090,12 +1293,14 @@
     "name": "Instrumentação e Medidas",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Opções Livres",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Opções Livres"
     ]
   },
   {
@@ -1103,12 +1308,14 @@
     "name": "Sistemas de Telecomunicações",
     "program": "MEEC",
     "dept": "DEEC",
-    "track": "Opções Livres",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Opções Livres"
     ]
   },
   {
@@ -1118,11 +1325,14 @@
     "acronym": "ADSI",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "SI",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Infraestruturas para Engenharia de Dados",
+      "Sistemas de Informação"
     ]
   },
   {
@@ -1132,11 +1342,14 @@
     "acronym": "AA",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "MTP",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Algoritmos e Aplicações",
+      "Bioinformática e Biologia Computacional"
     ]
   },
   {
@@ -1146,11 +1359,13 @@
     "acronym": "ALC",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "MTP",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Algoritmos e Aplicações"
     ]
   },
   {
@@ -1160,11 +1375,13 @@
     "acronym": "AIIC",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "ASO",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -1174,11 +1391,13 @@
     "acronym": "AES",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "MTP",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Engenharia de Software"
     ]
   },
   {
@@ -1188,11 +1407,14 @@
     "acronym": "AID",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "SI",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Ciência de Dados",
+      "Sistemas de Informação"
     ]
   },
   {
@@ -1202,11 +1424,14 @@
     "acronym": "AIP",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "SI",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       4
+    ],
+    "tracks": [
+      "Ciência de Dados",
+      "Sistemas Empresariais"
     ]
   },
   {
@@ -1216,11 +1441,13 @@
     "acronym": "AVTM",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IG",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Interação e Visualização"
     ]
   },
   {
@@ -1230,11 +1457,17 @@
     "acronym": "AProf",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IA",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Bioinformática e Biologia Computacional",
+      "Ciência de Dados",
+      "Inteligência Artificial",
+      "Robótica Inteligente",
+      "Tecnologias da Informação e Linguagem Humana"
     ]
   },
   {
@@ -1244,11 +1477,13 @@
     "acronym": "AS",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "MTP",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Engenharia de Software"
     ]
   },
   {
@@ -1258,11 +1493,13 @@
     "acronym": "AE",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "SI",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Sistemas Empresariais"
     ]
   },
   {
@@ -1272,11 +1509,13 @@
     "acronym": "BC",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "MTP",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Bioinformática e Biologia Computacional"
     ]
   },
   {
@@ -1286,11 +1525,13 @@
     "acronym": "CSF",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "ASO",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Ciber-Segurança"
     ]
   },
   {
@@ -1300,11 +1541,15 @@
     "acronym": "CD",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "SI",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Ciência de Dados",
+      "Inteligência Artificial",
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -1314,11 +1559,14 @@
     "acronym": "CRC",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "MTP",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Algoritmos e Aplicações",
+      "Bioinformática e Biologia Computacional"
     ]
   },
   {
@@ -1328,11 +1576,14 @@
     "acronym": "CNV",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "ASO",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       4
+    ],
+    "tracks": [
+      "Infraestruturas para Engenharia de Dados",
+      "Sistemas Distribuídos"
     ]
   },
   {
@@ -1342,11 +1593,13 @@
     "acronym": "CGJ",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IG",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Jogos"
     ]
   },
   {
@@ -1356,11 +1609,14 @@
     "acronym": "CMU",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "ASO",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       4
+    ],
+    "tracks": [
+      "Sistemas Ciberfísicos",
+      "Sistemas Distribuídos"
     ]
   },
   {
@@ -1370,11 +1626,14 @@
     "acronym": "CPD",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "MTP",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Algoritmos e Aplicações",
+      "Sistemas Distribuídos"
     ]
   },
   {
@@ -1384,11 +1643,13 @@
     "acronym": "CV",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IG",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Interação e Visualização"
     ]
   },
   {
@@ -1398,11 +1659,13 @@
     "acronym": "CCU",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IG",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Interação e Visualização"
     ]
   },
   {
@@ -1412,11 +1675,13 @@
     "acronym": "DIRVAM",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IG",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Interação e Visualização"
     ]
   },
   {
@@ -1426,11 +1691,13 @@
     "acronym": "DAD",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "ASO",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Sistemas Distribuídos"
     ]
   },
   {
@@ -1440,11 +1707,13 @@
     "acronym": "DJ",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IG",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Jogos"
     ]
   },
   {
@@ -1454,11 +1723,13 @@
     "acronym": "ESAD",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "ASO",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Infraestruturas para Engenharia de Dados"
     ]
   },
   {
@@ -1468,11 +1739,14 @@
     "acronym": "ETPN",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "SI",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Sistemas Empresariais",
+      "Sistemas de Informação"
     ]
   },
   {
@@ -1482,11 +1756,13 @@
     "acronym": "EDI",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IG",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -1496,11 +1772,14 @@
     "acronym": "GPI",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "SI",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Engenharia de Software",
+      "Sistemas Empresariais"
     ]
   },
   {
@@ -1510,11 +1789,14 @@
     "acronym": "IE",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "SI",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       4
+    ],
+    "tracks": [
+      "Sistemas Empresariais",
+      "Sistemas de Informação"
     ]
   },
   {
@@ -1524,11 +1806,13 @@
     "acronym": "IAES",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IA",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Inteligência Artificial"
     ]
   },
   {
@@ -1538,11 +1822,13 @@
     "acronym": "IAJ",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IA",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Jogos"
     ]
   },
   {
@@ -1552,11 +1838,14 @@
     "acronym": "IPIA",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IA",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       4
+    ],
+    "tracks": [
+      "Inteligência Artificial",
+      "Jogos"
     ]
   },
   {
@@ -1566,11 +1855,14 @@
     "acronym": "LN",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IA",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Inteligência Artificial",
+      "Tecnologias da Informação e Linguagem Humana"
     ]
   },
   {
@@ -1580,11 +1872,13 @@
     "acronym": "LProg",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "MTP",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       4
+    ],
+    "tracks": [
+      "Algoritmos e Aplicações"
     ]
   },
   {
@@ -1594,11 +1888,13 @@
     "acronym": "MDJ",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IG",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       4
+    ],
+    "tracks": [
+      "Jogos"
     ]
   },
   {
@@ -1608,11 +1904,14 @@
     "acronym": "PADInt",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IA",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Inteligência Artificial",
+      "Robótica Inteligente"
     ]
   },
   {
@@ -1622,11 +1921,14 @@
     "acronym": "PSIA",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "ASO",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Infraestruturas para Engenharia de Dados",
+      "Sistemas Empresariais"
     ]
   },
   {
@@ -1636,11 +1938,15 @@
     "acronym": "PCM",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IG",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Interação e Visualização",
+      "Jogos",
+      "Tecnologias da Informação e Linguagem Humana"
     ]
   },
   {
@@ -1650,11 +1956,13 @@
     "acronym": "P3D",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IG",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       4
+    ],
+    "tracks": [
+      "Interação e Visualização"
     ]
   },
   {
@@ -1664,11 +1972,13 @@
     "acronym": "PAva",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "MTP",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Engenharia de Software"
     ]
   },
   {
@@ -1678,11 +1988,13 @@
     "acronym": "RSIHR",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IA",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Robótica Inteligente"
     ]
   },
   {
@@ -1692,11 +2004,14 @@
     "acronym": "SGSI",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "SI",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       4
+    ],
+    "tracks": [
+      "Ciber-Segurança",
+      "Sistemas Empresariais"
     ]
   },
   {
@@ -1706,11 +2021,14 @@
     "acronym": "SegSoft",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "MTP",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Ciber-Segurança",
+      "Engenharia de Software"
     ]
   },
   {
@@ -1720,11 +2038,15 @@
     "acronym": "SIRS",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "ASO",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       2
+    ],
+    "tracks": [
+      "Ciber-Segurança",
+      "Infraestruturas para Engenharia de Dados",
+      "Sistemas Distribuídos"
     ]
   },
   {
@@ -1734,11 +2056,15 @@
     "acronym": "SEC",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "ASO",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Ciber-Segurança",
+      "Sistemas Ciberfísicos",
+      "Sistemas Distribuídos"
     ]
   },
   {
@@ -1748,11 +2074,15 @@
     "acronym": "SIP",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "SI",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Ciência de Dados",
+      "Sistemas de Informação",
+      "Tecnologias da Informação e Linguagem Humana"
     ]
   },
   {
@@ -1762,11 +2092,13 @@
     "acronym": "TIDB",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "SI",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3
+    ],
+    "tracks": [
+      "Bioinformática e Biologia Computacional"
     ]
   },
   {
@@ -1776,11 +2108,13 @@
     "acronym": "TVS",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "MTP",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       4
+    ],
+    "tracks": [
+      "Engenharia de Software"
     ]
   },
   {
@@ -1790,11 +2124,14 @@
     "acronym": "VI",
     "program": "MEIC-A",
     "dept": "DEI",
-    "track": "IG",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1
+    ],
+    "tracks": [
+      "Ciência de Dados",
+      "Interação e Visualização"
     ]
   },
   {
@@ -1804,12 +2141,14 @@
     "acronym": "CC",
     "program": "MEIC-A",
     "dept": "DM",
-    "track": "LogCom",
     "credits": 6.0,
     "semester": 1,
     "periods": [
       1,
       2
+    ],
+    "tracks": [
+      "Algoritmos e Aplicações"
     ]
   },
   {
@@ -1819,12 +2158,14 @@
     "acronym": "CPS",
     "program": "MEIC-A",
     "dept": "DM",
-    "track": "LogCom",
     "credits": 6.0,
     "semester": 2,
     "periods": [
       3,
       4
+    ],
+    "tracks": [
+      "Ciber-Segurança"
     ]
   },
   {
@@ -1834,11 +2175,14 @@
     "acronym": "DDRS",
     "program": "MEIC-A",
     "dept": "DEEC",
-    "track": "Comp",
     "credits": 6.0,
     "semester": 1,
     "periods": [
+      1,
       2
+    ],
+    "tracks": [
+      "Infraestruturas para Engenharia de Dados"
     ]
   },
   {
@@ -1848,11 +2192,15 @@
     "acronym": "IR",
     "program": "MEIC-A",
     "dept": "DEEC",
-    "track": "SDC",
     "credits": 6.0,
     "semester": 1,
     "periods": [
-      1
+      1,
+      2
+    ],
+    "tracks": [
+      "Robótica Inteligente",
+      "Sistemas Ciberfísicos"
     ]
   },
   {
@@ -1862,11 +2210,15 @@
     "acronym": "PF",
     "program": "MEIC-A",
     "dept": "DEEC",
-    "track": "SDC",
     "credits": 6.0,
     "semester": 2,
     "periods": [
+      3,
       4
+    ],
+    "tracks": [
+      "Robótica Inteligente",
+      "Tecnologias da Informação e Linguagem Humana"
     ]
   },
   {
@@ -1876,11 +2228,14 @@
     "acronym": "PIV",
     "program": "MEIC-A",
     "dept": "DEEC",
-    "track": "SDC",
     "credits": 6.0,
     "semester": 1,
     "periods": [
+      1,
       2
+    ],
+    "tracks": [
+      "Robótica Inteligente"
     ]
   },
   {
@@ -1890,11 +2245,14 @@
     "acronym": "SRM",
     "program": "MEIC-A",
     "dept": "DEM",
-    "track": "CAII",
     "credits": 6.0,
     "semester": 2,
     "periods": [
+      3,
       4
+    ],
+    "tracks": [
+      "Robótica Inteligente"
     ]
   }
 ]
